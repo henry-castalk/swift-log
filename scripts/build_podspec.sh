@@ -74,12 +74,10 @@ Pod::Spec.new do |s|
   s.documentation_url = 'https://apple.github.io/swift-log'
   s.module_name = 'Logging'
 
-  s.swift_version = '5.0'
-  s.cocoapods_version = '>=1.6.0'
-  s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.9'
-  s.tvos.deployment_target = '9.0'
-  s.watchos.deployment_target = '2.0'
+  s.swift_version = '5.9'
+  s.cocoapods_version = '>= 1.10.0'
+
+  s.ios.deployment_target = '12.0'
 
   s.source_files = 'Sources/Logging/**/*.swift'
 end
@@ -90,5 +88,6 @@ if $upload; then
   pod trunk push "${tmpdir}/${podspec_name}.podspec"
 else
   echo "Linting ${tmpdir}/${podspec_name}.podspec"
-  pod spec lint "${tmpdir}/${podspec_name}.podspec"
+  pod spec lint "${tmpdir}/${podspec_name}.podspec" --verbose --allow-warnings
+  cp "${tmpdir}/${podspec_name}.podspec" "./${podspec_name}.podspec"
 fi
